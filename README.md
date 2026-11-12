@@ -41,19 +41,6 @@ See [`examples/`](examples) for complete scripts.
 
 [erdi-lrf-drivers](https://github.com/ErdiTech/erdi-lrf-drivers) (Python, Arduino, ROS 2), [erdi-lrf-esp32-micropython](https://github.com/ErdiTech/erdi-lrf-esp32-micropython), [erdi-lrf-home-assistant](https://github.com/ErdiTech/erdi-lrf-home-assistant).
 
-## Support / 打赏
-
-If this project saved you time, you can buy the author a coffee in crypto. Thank you!
-如果这个项目帮到了你，欢迎用加密货币打赏支持，谢谢！
-
-| Network | Asset | Address |
-|---|---|---|
-| TRON (TRC20) | USDT | `TNGdTwE6opH6rmUyoG1JUR7FSyEb4k273R` |
-| Ethereum / BNB Chain / Polygon | USDT | `0x59c43144a862b351fa1086ae842d1327c9d91613` |
-| Ethereum / Arbitrum / Base | ETH | `0x59c43144a862b351fa1086ae842d1327c9d91613` |
-| Bitcoin | BTC | `1RS6tWXHregLfEsiPzVUCUBuhgDg5uTSV` |
-| Solana | USDT | `HZguEXfTtLChNdJTxAYCbcGscaqikz8JYrEpUhEyeVd9` |
-
 ## License
 
 MIT, copyright 2026 ERDI TECH LTD. See [LICENSE](LICENSE).
