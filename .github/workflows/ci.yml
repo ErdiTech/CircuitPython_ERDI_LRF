@@ -5,12 +5,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: pip install pytest circuitpython-build-tools
       - run: python -m pytest -q tests
-      - name: Build the library the way the CircuitPython bundle does
+      - name: Compile with the CircuitPython bundle tooling (mpy-cross for 9.x, 10.x, 11.x)
         run: |
-          mkdir -p /tmp/lib && cp erdi_lrf.py /tmp/lib/
-          circuitpython-build-bundles --filename_prefix test --library_location /tmp/lib --library_depth 1 --package_folder_prefix erdi_ --output_directory /tmp/out || true
-          ls -R /tmp/out || true
+          mkdir -p /tmp/bundle/libraries && cd /tmp/bundle
+          git init -q . && git -c user.name=ci -c user.email=ci@example.com commit -q --allow-empty -m init && git tag 0.0.1
+          cp -r "$GITHUB_WORKSPACE" libraries/CircuitPython_ERDI_LRF
+          circuitpython-build-bundles --filename_prefix ci --library_location libraries --library_depth 1 --output_directory out
+          python - <<'PY'
+          import zipfile
+          for v in ("9", "10", "11"):
+              names = zipfile.ZipFile(f"out/ci-{v}.x-mpy-0.0.1.zip").namelist()
+              assert any(n.endswith("lib/erdi_lrf.mpy") for n in names), (v, names)
+          print("mpy build ok for 9.x, 10.x, 11.x")
+          PY
