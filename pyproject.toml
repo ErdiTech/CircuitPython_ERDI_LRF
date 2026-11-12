@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "circuitpython-erdi-lrf"
+dynamic = ["version"]
+description = "CircuitPython driver for ERDI 905 nm laser rangefinder modules (UART)"
+readme = "README.md"
+authors = [{ name = "ERDI TECH LTD", email = "tommy@erdimail.com" }]
+license = { text = "MIT" }
+keywords = ["circuitpython", "blinka", "laser", "rangefinder", "distance", "uart", "lidar", "erdi"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+
+[project.urls]
+Homepage = "https://erdilrf.com/"
+Repository = "https://github.com/ErdiTech/CircuitPython_ERDI_LRF"
+
+[tool.setuptools]
+py-modules = ["erdi_lrf"]
+
+[tool.setuptools.dynamic]
+version = { attr = "erdi_lrf.__version__" }

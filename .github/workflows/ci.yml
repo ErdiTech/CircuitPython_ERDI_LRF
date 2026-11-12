@@ -1,0 +1,16 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install pytest circuitpython-build-tools
+      - run: python -m pytest -q tests
+      - name: Build the library the way the CircuitPython bundle does
+        run: |
+          mkdir -p /tmp/lib && cp erdi_lrf.py /tmp/lib/
+          circuitpython-build-bundles --filename_prefix test --library_location /tmp/lib --library_depth 1 --package_folder_prefix erdi_ --output_directory /tmp/out || true
+          ls -R /tmp/out || true
